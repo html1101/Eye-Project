@@ -1,0 +1,106 @@
+body {
+    transition: 0.2s;
+}
+
+body.night {
+    background: var(--off-dark);
+}
+
+body.sun {
+    background: white;
+    color: var(--off-dark);
+}
+
+.night_toggle {
+    position: fixed;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    width: 1.5em;
+    height: 1.5em;
+}
+.night_toggle > * {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.night_toggle.sun .bi-sun {
+    display: block;
+}
+.night_toggle.night .bi-moon-stars {
+    display: block;
+}
+
+body {
+    overflow-y: hidden;
+}
+
+.letters {
+    font-family: "Courier Bold", "Courier";
+    font-weight: bolder;
+}
+/*
+Source: https://www.researchgate.net/figure/Font-sizes-used-in-Snellen-chart-when-viewed-at-20-feet-and-adapted-font-sizes-for_tbl3_253433795
+Distance (feet)  70   60    50    40    30    20    15    10    7    4
+letter ht (mm)   31   27    22    18    13     9     7     4    3    2
+letter ht (pt)   88   76    63    50    38    25    19    13    9    5
+font size (pt)  152  130   108    87    65    43    33    21   15    9
+*/
+.s20-200 {
+    font-size: 434pt;
+}
+.s20-100 {
+    font-size: 217pt;
+}
+.s20-70 {
+    font-size: 152pt;
+}
+.s20-60 {
+    font-size: 130pt;
+}
+.s20-50 {
+    font-size: 108pt;
+}
+.s20-40 {
+    font-size: 87pt;
+}
+.s20-30 {
+    font-size: 65pt;
+}
+.s20-20 {
+    font-size: 43pt;
+}
+.s15-20 {
+    font-size: 33pt;
+}
+.s10-20 {
+    font-size: 21pt;
+}
+.s7-20 {
+    font-size: 15pt;
+}
+.s4-20 {
+    font-size: 9pt;
+}
+
+.letters {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1.2em;
+}
+
+.info {
+    position: relative;
+    width: 100%;
+}
+
+.info .level {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    letter-spacing: normal !important;
+}
