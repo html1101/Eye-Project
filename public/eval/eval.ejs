@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <!-- Add this little linker into all the code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../public/stylesheets/stylesheet.css">
+
+    <!-- This is eval specific -->
+    <link rel="stylesheet" href="../public/eval/eval.css">
+    <body>
+        <!-- Will make everything in a flex container -->
+        <div class="content-flex">
+            <!-- This is the header -->
+            <div class="header">
+                <a class="header-content" href="/dashboard">Dashboard</a>
+                <a class="header-content" href="/learn">Learning</a>
+                <div class="header-content focused">Evaluation</div>
+            </div>
+            <div class="content">
+                <!-- Status banner tells us how we're doing -->
+                <div class="status-banner <%= eval_state %>">
+                    <div class="status-background"></div>
+                    <!-- x, progress, or check -->
+                    <% if(eval_state == 'todo'){ %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi big-icon bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                        </svg>
+                    <% } else{ %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi big-icon bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                    <% } %>
+                    <div class="side_txt">
+                        <h1 class="state">All Done!</h1>
+                        <progress class="progress_bar" value="32" min="0" max="100"> 32% </progress>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

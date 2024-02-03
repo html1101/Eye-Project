@@ -1,4 +1,8 @@
 {
     "name": "Jane",
-    "email": "jane@cmu.edu"
+    "email": "jane@cmu.edu",
+    "provider": "Dr. Khatib",
+    "img_url": "https://logodix.com/logo/640751.png",
+    "eval_state": "todo",
+    "eval_todo": ["snellan_chart", "color_blindness", "peripheral_vision"]
 }

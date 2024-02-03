@@ -1,0 +1,35 @@
+.status-banner {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 9em;
+    width: calc(100% - 2em);
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--success-light);
+}
+
+.status-banner.todo > svg {
+    color: var(--success);
+    height: 100%;
+}
+
+.status-banner > .big-icon {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.status-banner progress[value] {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+     appearance: none;
+  
+    width: 250px;
+    height: 20px;
+  }
