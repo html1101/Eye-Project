@@ -11,26 +11,28 @@
 
 //constraints – accept audio and video
 
-const video = document.getElementById("video");
 
+
+navigator.mediaDevices.getUserMedia({video: true,audio:true})
+  
 document.body.addEventListener("click", async evt => {
-    console.log("hey");
     const permissions = await navigator.permissions.query({
         name: "camera"
     });
+    
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-        console.log("enumerateDevices() not supported.");
         return;
     }
     if (permissions.state == "granted") {
+        console.log("permissions granted.");
         let mediaDevices = await navigator.mediaDevices.enumerateDevices();
         console.log(mediaDevices);
         navigator.mediaDevices
-        .getUserMedia({ video: true, audio: false, deviceId: {exact: "217b0dec085216e2dab72bbbceeaf8f1851a414b381f5457becf5d71ca1a9bc1"}})
+        .getUserMedia({ video: true, audio: true, deviceId: {exact: "217b0dec085216e2dab72bbbceeaf8f1851a414b381f5457becf5d71ca1a9bc1"}})
         .then((stream) => {
             video.srcObject = stream;
             video.play();
-            console.log("yoyo!!!");
+    
         })
         .catch((err) => {
             console.error(`An error occurred: ${err}`);
@@ -76,3 +78,8 @@ document.body.addEventListener("click", async evt => {
   //const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
 
   //const poses = await detector.estimatePoses(video);
+
+  /* 
+  
+
+  */

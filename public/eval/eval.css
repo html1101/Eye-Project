@@ -33,3 +33,12 @@
     width: 250px;
     height: 20px;
   }
+
+  #video {
+    display: none;
+  }
+  #output-canvas {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
