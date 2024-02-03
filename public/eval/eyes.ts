@@ -10,10 +10,20 @@ import '@tensorflow/tfjs-backend-webgl';
 //html
 
 //constraints – accept audio and video
-const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+
 const video = <HTMLVideoElement>document.getElementById("video");
-video.srcObject = mediaStream;
+
 video.play()
+
+navigator.mediaDevices
+  .getUserMedia({ video: true, audio: false })
+  .then((stream) => {
+    video.srcObject = stream;
+    video.play();
+  })
+  .catch((err) => {
+    console.error(`An error occurred: ${err}`);
+  });
 
 
 // It basically tells the getUserMedia() to 
