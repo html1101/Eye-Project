@@ -7,6 +7,14 @@
 //read from web cam
 //html
 //constraints – accept audio and video
+
+
+navigator.permissions.query({ name: "camera"}).then(res => {
+  if(res.state == "granted"){
+      // has permission
+  }
+});
+
 const video = document.getElementById("video");
 video.play();
 navigator.mediaDevices

@@ -7,6 +7,7 @@
 
 
 
+
 //read from web cam
 //html
 
@@ -15,6 +16,12 @@
 const video = <HTMLVideoElement>document.getElementById("video");
 
 video.play()
+const c = "camera" as PermissionName
+navigator.permissions.query({ name: c}).then(res => {
+  if(res.state == "granted"){
+      // has permission
+  }
+});
 
 navigator.mediaDevices
   .getUserMedia({ video: true, audio: false })
