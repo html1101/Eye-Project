@@ -39,7 +39,15 @@
                     </div>
                 </div>
                 <div class="history_side">
-                    <h3>Patient History</h3>
+                    <h2>Patient History</h2>
+                    <!-- Display list of the tasks they've done -->
+                    <% for(let i = eval_completed.length - 1; i >= 0; i--) { %>
+                        <div class="entry">
+                            <h4>Test Completed</h4>
+                            &emsp;<b>Name: </b><%= eval_completed[i].name %><br>
+                            &emsp;<b>Completed On: </b><%= eval_completed[i].completed_on %>
+                        </div>
+                    <% } %>
                 </div>
             </div>
         </div>

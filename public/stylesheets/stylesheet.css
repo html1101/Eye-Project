@@ -4,6 +4,7 @@ body {
     /* The color palette */
     --off-dark: #222222;
     --lighter-dark: #333333;
+    --even-lighter-dark: #555555;
     --focus-blue: #33a8f1;
     --focus-red: #cc1266;
     --success: #00C07F;
@@ -37,6 +38,7 @@ body {
     width: 100%;
     height: 3em;
     cursor: pointer;
+    background: var(--lighter-dark);
 }
 .header > *.focused {
     color: var(--focus-blue);

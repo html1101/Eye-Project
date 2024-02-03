@@ -3,8 +3,8 @@
     "email": "jane@cmu.edu",
     "provider": "Dr. Khatib",
     "img_url": "https://logodix.com/logo/640751.png",
-    "eval_state": "todo",
-    "eval_percent": 50,
+    "eval_state": "done",
+    "eval_percent": 100,
     "eval_todo": [
         {
             "name": "Color Blindness Test",
@@ -13,9 +13,7 @@
         {
             "name": "Peripheral Vision Test",
             "id": "peripheral_vision"
-        }
-    ],
-    "eval_completed": [
+        },
         {
             "name": "Snellan Chart",
             "completed_on": "01/23/24 3:00 PM",
@@ -23,9 +21,12 @@
         },
         {
             "id": "dry_eyes",
-            "completed_on": "2/3/2024, 01:57 PM",
-            "name": "Dry Eyes Test"
+            "completed_on": "2/3/2024, 03:01 PM",
+            "name": "Dry Eyes Test",
+            "score": 7.215202369200395
         }
+    ],
+    "eval_completed": [
     ],
     "eval_due": "03/01/24"
 }

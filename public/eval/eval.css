@@ -74,10 +74,15 @@ progress[value].done::-webkit-progress-value {
 /* List of tasks */
 .task_list {
     position: relative;
-    width: 100%;
-    padding: 20px;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
     box-sizing: border-box;
-    margin-top: -1em;
+    margin-top: 1em;
+    background: var(--lighter-dark);
+    max-height: calc(100vh - 15em);
+    overflow-y: auto;
 }
 .task_list .task {
     height: 3em;
@@ -85,10 +90,15 @@ progress[value].done::-webkit-progress-value {
     display: block;
     position: relative;
     line-height: 3em;
-    background: var(--lighter-dark);
+    background: var(--even-lighter-dark);
     color: white !important;
     text-decoration: none;
-    width: 100%;
+    width: 95%;
+    left: 2.5%;
+    margin-bottom: 0.7em;
+    border-radius: 3px;
+    transition: 0.2s;
+    box-shadow: 1px 1px 0.2em 1px rgba(0, 0, 0, 0);
 }
 .task_list .task .name {
     display: inline-block;
@@ -106,6 +116,9 @@ progress[value].done::-webkit-progress-value {
     transition: 0.2s;
     top: 50%;
     transform: translateY(-50%);
+}
+.task_list .task:not(.done):hover {
+    box-shadow: 1px 1px 0.2em 1px rgba(0, 0, 0, 0.3);
 }
 .task_list .task:not(.done):hover svg {
     opacity: 1;

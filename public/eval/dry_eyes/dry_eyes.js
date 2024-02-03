@@ -3,6 +3,7 @@ let night_tog = document.querySelector(".night_toggle");
 let mode = night_tog.classList.contains("night") ? "night" : "sun";
 document.body.className = mode;
 const std_N = 1;
+const THRESHOLD = 10;
 
 night_tog.addEventListener("click", evt => {
     if(night_tog.classList.contains("night")) { mode = "sun"; }
@@ -138,17 +139,17 @@ const main = async () => {
 
         console.log("ANALYSIS:", avg, std);
         // Log # of times we went over the std by N (a constant) + use for figuring out # of blinks
-        let suspected_blinks = summ.map((e, i) => {
+        /*let suspected_blinks = summ.map((e, i) => {
             return avg + std_N * std - e
-        });
-        console.log(suspected_blinks);
+        });*/
+        let suspected_blinks = summ;
         // Now cluster blinks that happened at the same times
         const avg_val = (list) => list.reduce((a, b) => a+b);
         let blinks = [];
         let avg_last = [];
         let going_down = 0;
         let num_keep = 10;
-        for(let i = 0; i < suspected_blinks.length; i++) {
+        /*for(let i = 0; i < suspected_blinks.length; i++) {
             if(avg_last.length < num_keep) {
                 avg_last.push(suspected_blinks[i]);
                 continue;
@@ -158,19 +159,34 @@ const main = async () => {
             avg_last = avg_last.slice(-num_keep);
             let new_pts = avg_val(avg_last);
 
-            if(going_down > num_keep && new_pts - pts > 1) {
+            if(going_down > num_keep && new_pts - pts > 0.5) {
                 blinks.push(new_pts);
                 going_down = 0;
             }
             if(new_pts - pts < 0) {
                 going_down++;
             }
+        }*/
+        let last_kept = false;
+        let min = (Math.min(...suspected_blinks) * 7/10) + (Math.max(...suspected_blinks) * 3/10);
+        console.log("Min value: ", min);
+        console.log(suspected_blinks);
+        for(let i = 0; i < suspected_blinks.length; i++) {
+            if(suspected_blinks[i] <= min && !last_kept) {
+                blinks.push(suspected_blinks[i]);
+                last_kept = true;
+            } else if(suspected_blinks[i] > min) {
+                last_kept = false;
+            }
         }
-        let num_blinks = Math.round(blinks.length / 2);
+        let num_blinks = Math.round(blinks.length);
         let mins = (new Date().getTime() - time_stamp) / 60000;
         console.log("Blinks detected: ", num_blinks, "\nBlinks per Minute: ", num_blinks / mins, "(" + mins + ")");
+        // Score this person--0 means normal, 1+ means wat da hell you crazy
+        // avg is 17.5 bpm, std is 2.5 bpm
+        const score = ((num_blinks / mins) - 17.5) / 2.5;
         // Send this information to the backend
-        await fetch(`/save/dry_eyes?num_blinks=${num_blinks}&bpm=${num_blinks / mins}&mins=${mins}`);
+        await fetch(`/save/dry_eyes?num_blinks=${num_blinks}&bpm=${num_blinks / mins}&mins=${mins}&score=${score}`);
         // Okok now time to go back to the home page?
         window.location = "/";
     })

@@ -24,7 +24,7 @@ app.use(express.json());
 const send_dashboard = (res) => {
   res.render(
     path.join(__dirname, "public", "dashboard", "dashboard"),
-    { name, email, provider, img_url }
+    { name, email, provider, img_url, eval_completed }
   );
 }
 
@@ -73,10 +73,12 @@ app.get("/eval/dry_eyes", (_req, res) => {
 // Listen for saving info from the backend + place into test_data.json
 app.get('/save/dry_eyes', (req, res) => {
   // Parse info from JSON
-  let { num_blinks, bpm, mins } = req.query;
+  let { num_blinks, bpm, mins, score } = req.query;
   num_blinks = parseFloat(num_blinks);
   bpm = parseFloat(bpm);
+  score = parseFloat(score);
   mins = parseFloat(mins);
+  console.log(`Estimated score:\n\tBPM: ${bpm}\n\tScore: ${score}`);
   
   // Now take test_data.json.
   fs.writeFileSync(path.join(__dirname, "test_data.json"), JSON.stringify({ num_blinks, bpm, mins }, null, 4));
@@ -88,9 +90,9 @@ app.get('/save/dry_eyes', (req, res) => {
   var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: "2-digit", minute: "2-digit"};
   var today  = new Date();
 
-  eval_completed.push({id: "dry_eyes", completed_on: today.toLocaleDateString("en-US", options), name: "Dry Eyes Test"});
+  eval_completed.push({id: "dry_eyes", completed_on: today.toLocaleDateString("en-US", options), name: "Dry Eyes Test", score });
   // Now update the percent accordingly
-  eval_percent = Math.round(eval_todo.length / (eval_completed.length + eval_todo.length) * 100);
+  eval_percent = Math.round(eval_completed.length / (eval_completed.length + eval_todo.length) * 100);
   if(eval_percent == 100) eval_state = "done";
   else eval_state = "todo";
   change_user_info({ eval_state, eval_percent, eval_todo, eval_completed });

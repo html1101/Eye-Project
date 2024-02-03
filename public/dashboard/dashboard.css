@@ -2,6 +2,7 @@
 .content {
     display: flex;
     flex-direction: row;
+    height: calc(100% - 5em);
 }
 
 /* This is the left side of the dashboard */
@@ -9,11 +10,16 @@
     width: 200px;
     height: 100%;
     padding-left: 5px;
+    padding-top: 0.5em;
     border-right: 1.5px solid rgba(255, 255, 255, 0.1);
 }
 
 .content > .history_side {
     padding-left: 5px;
+    position: relative;
+    height: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 .content > .person_side > .person_img {
