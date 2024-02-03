@@ -43,7 +43,7 @@
         .getUserMedia({video:{
             width: vid_width,
             height: vid_height,
-          },audio:true})
+          },audio:false})
         .then((stream)=> {
             vid.srcObject = stream;
             vid.play()

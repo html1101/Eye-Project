@@ -19,10 +19,8 @@ const send_dashboard = (res) => {
     { name, email, provider, img_url }
   );
 }
-const { Configuration, OpenAIApi } = require("openai");
-const configuration = new Configuration({
-  apiKey: "your_api_key",
-});
+
+
 
 // Main page routes to dashboard
 app.get('/', (_req, res) => {
