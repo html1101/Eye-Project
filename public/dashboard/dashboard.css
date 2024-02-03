@@ -1,0 +1,41 @@
+/* Contains the actual content of the dashboard */
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+/* This is the left side of the dashboard */
+.content > .person_side {
+    width: 200px;
+    height: 100%;
+    padding-left: 5px;
+    border-right: 1.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.content > .history_side {
+    padding-left: 5px;
+}
+
+.content > .person_side > .person_img {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 100%;
+    max-width: 100px;
+    max-height: 100px;
+    background: white;
+}
+
+.content > .person_side > .info > * {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+}
+.content > .person_side > .info .name {
+    width: 5em;
+    font-weight: bolder;
+}
+
+.content > .info {
+    flex-grow: 1;
+}

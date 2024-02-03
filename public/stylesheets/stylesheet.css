@@ -1,0 +1,55 @@
+body {
+    /* Header is taking up the top 5em, so push down */
+    font-family: "Roboto", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* The color palette */
+    --off-dark: #222222;
+    --focus-blue: #33a8f1;
+    --focus-red: #cc1266;
+    --success: #00C07F;
+    --failure: #FF6562;
+    background: var(--off-dark);
+    color: white;
+}
+
+/* Styling for the flex content */
+.content-flex {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling for header */
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    vertical-align: middle;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    cursor: pointer;
+}
+.header > *.focused {
+    color: var(--focus-blue);
+}
+.header > * {
+    color: white;
+    text-decoration: none;
+    transition: 0.25s;
+    border-bottom: 1.5px solid transparent;
+}
+.header > *:hover {
+    border-bottom: 1.5px solid var(--focus-blue);
+}
+.content {
+    /* Content fills up the rest of what's available */
+    position: relative;
+    flex-grow: 1;
+}

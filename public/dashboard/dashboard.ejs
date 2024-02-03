@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <!-- Add this little linker into all the code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../public/stylesheets/stylesheet.css">
+
+    <!-- This is dashboard specific -->
+    <link rel="stylesheet" href="../public/dashboard/dashboard.css">
+    <body>
+        <!-- Will make everything in a flex container -->
+        <div class="content-flex">
+            <!-- This is the header -->
+            <div class="header">
+                <div class="header-content focused">Dashboard</div>
+                <a class="header-content" href="/learn">Learning</a>
+                <a class="header-content" href="/eval">Evaluation</a>
+            </div>
+            <div class="content">
+                <!-- Delete this and replace this with the stuff you need -->
+                <div class="person_side">
+                    <img class="person_img" src="<%= img_url %>">
+                    <h3 class="person_inf">Personal Info</h3>
+                    <div class="info">
+                        <!-- Separate into name, info -->
+                        <div>
+                            <div class="name">Name</div>
+                            <div class="info"><%= name %></div>
+                        </div>
+                        <div>
+                            <div class="name">Email</div>
+                            <div class="info"><%= email %></div>
+                        </div>
+                        <div>
+                            <div class="name">Provider</div>
+                            <div class="info"><%= provider %></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="history_side">
+                    <h3>Patient History</h3>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
