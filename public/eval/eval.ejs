@@ -38,6 +38,13 @@
                 </div>
                 <video id="video">Video stream not available.</video>
                 <canvas id="output-canvas" width = "500" height = "500"> </canvas>
+                <div class ="audio">
+                    <audio id = recordedAudio></audio>
+                    <p>
+                        <button id="btnStart">Start Recording</button>
+                        <button id="btnStop" disabeled>Stop Recording</button>
+                    </p>
+                </div>
                 <div class="task_list">
                     <!-- Put todos at the top -->
                     <% for(var i = 0; i < eval_todo.length; i++) { %>
@@ -60,16 +67,17 @@
                     <% } %>
                 </div>
             </div>
+            
         </div>
-        
-        <button id="btnStart">Start Recording</button>
-        <button id="btnStop" disabeled>Stop Recording</button>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
-        <script src="../public/eval/pyramid/camera.js"></script>
-        <script src="../public/eval/pyramid/audio.js"></script>
+        <!-- <script type="module" src="../public/eval/pyramid/OpenAI-mod.js"></script>-->
+        <!-- <script src="../public/eval/pyramid/camera.js"></script> -->
+         <script src="../public/eval/pyramid/audio.js"></script>
+    
     </body>
+   
       
 </html>

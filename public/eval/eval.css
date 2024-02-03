@@ -49,7 +49,11 @@
     left: 50%;
     transform: translateX(-50%);
 }
-
+#button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 /* Container */
 progress[value]::-webkit-progress-bar {

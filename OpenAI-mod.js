@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from "openai";
-
 export class OpenAI {
   constructor() {
     // Create the Configuration and OpenAIApi instances

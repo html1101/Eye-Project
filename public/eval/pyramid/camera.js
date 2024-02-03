@@ -19,7 +19,6 @@
     const inBounds2d = (x,y) => (x > xlwr) && (x < vid_width -xlwr) && (y > ylwr) && (y < vid_height - ylwr) 
     
     
-
     let vid,c1,ctx1,c_tmp,ctx_tmp,inFrame,r,g,b,detector,detectorConfig;
     async function start() {
         detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
@@ -43,7 +42,7 @@
         .getUserMedia({video:{
             width: vid_width,
             height: vid_height,
-          },audio:false})
+          },audio:true})
         .then((stream)=> {
             vid.srcObject = stream;
             vid.play()
