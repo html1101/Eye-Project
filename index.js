@@ -1,14 +1,14 @@
 const express = require('express'),
-// For joining the paths properly on different OSes
-path = require("path"),
-// For reading the user_info file
-fs = require("fs"),
-app = express(),
-port = 8080;
+  // For joining the paths properly on different OSes
+  path = require("path"),
+  // For reading the user_info file
+  fs = require("fs"),
+  app = express(),
+  port = 8080;
 
 // Get user info by reading file
 const user_info = JSON.parse(fs.readFileSync(path.join(__dirname, "user_info.json")));
-const { name, email, provider, img_url, eval_state } = user_info;
+const { name, email, provider, img_url, eval_state, eval_percent, eval_todo, eval_completed } = user_info;
 
 // This lets us put in user info super easily
 app.set("view engine", "ejs");
@@ -33,14 +33,14 @@ app.get("/dashboard", (_req, res) => {
 
 // /learn routes to the learning page!
 app.get("/learn", (_req, res) => {
-    res.sendFile(path.join(__dirname, "public", "learn", "learn.html"));
+  res.sendFile(path.join(__dirname, "public", "learn", "learn.html"));
 });
 
 // /eval routes to the eval page
 app.get("/eval", (_req, res) => {
   res.render(
     path.join(__dirname, "public", "eval", "eval"),
-    { eval_state }
+    { eval_state, eval_percent, eval_todo, eval_completed }
   );
 });
 

@@ -11,9 +11,15 @@
     background: var(--success-light);
 }
 
-.status-banner.todo > svg {
-    color: var(--success);
+.status-banner > svg {
     height: 100%;
+}
+.status-banner.todo > svg {
+    color: var(--failure);
+}
+
+.status-banner.done > svg {
+    color: var(--success);
 }
 
 .status-banner > .big-icon {
@@ -32,13 +38,73 @@
   
     width: 250px;
     height: 20px;
-  }
 
-  #video {
+}
+
+#video {
     display: none;
-  }
-  #output-canvas {
+}
+#output-canvas {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-  }
+}
+
+
+/* Container */
+progress[value]::-webkit-progress-bar {
+    background: var(--lighter-dark);
+    border-radius: 2px;
+    box-shadow: 1px 1px 0.1em 1px rgba(0, 0, 0, 0.1);
+}
+/* Container progress value */
+progress[value]::-webkit-progress-value {
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+progress[value].todo::-webkit-progress-value {
+    background: var(--failure);
+}
+progress[value].done::-webkit-progress-value {
+    background: var(--success);
+}
+
+/* List of tasks */
+.task_list {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.task_list .task {
+    height: 3em;
+    padding-left: 5px;
+    display: block;
+    position: relative;
+    line-height: 3em;
+    background: var(--lighter-dark);
+    color: white !important;
+    text-decoration: none;
+    width: 100%;
+}
+.task_list .task .name {
+    display: inline-block;
+}
+.task_list .task .completed {
+    color: rgba(255, 255, 255, 0.3);
+}
+.task_list .task.done {
+    opacity: 0.7;
+}
+.task_list .task svg {
+    position: absolute;
+    right: 10px;
+    opacity: 0;
+    transition: 0.2s;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.task_list .task:not(.done):hover svg {
+    opacity: 1;
+}
+>>>>>>> origin/master

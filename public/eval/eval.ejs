@@ -32,16 +32,34 @@
                         </svg>
                     <% } %>
                     <div class="side_txt">
-                        <h1 class="state">All Done!</h1>
-                        <progress class="progress_bar" value="32" min="0" max="100"> 32% </progress>
+                        <h1 class="state"><%= eval_state == 'todo' ? eval_todo.length + ' Tasks to Complete' : 'All Done!'%></h1>
+                        <progress class="progress_bar <%= eval_state %>" value="<%= eval_percent %>" min="0" max="100"> <%= eval_percent %>% </progress>
                     </div>
-
-                    
                 </div>
                 <video id="video">Video stream not available.</video>
                 <canvas id="output-canvas" width = "500" height = "500"> </canvas>
-        
-            
+                <div class="task_list">
+                    <!-- Put todos at the top -->
+                    <% for(var i = 0; i < eval_todo.length; i++) { %>
+                        <a class="task" href="../public/eval/<%= eval_todo[i].id %>">
+                            <div class="name"><%= eval_todo[i].name %></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right arrow" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </a>
+                    <% } %>
+
+                    <% for(var i = 0; i < eval_completed.length; i++) { %>
+                        <div class="task done">
+                            <div class="name"><%= eval_completed[i].name %></div>
+                            <em class="completed">Completed on <%= eval_completed[i].completed_on %></em>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right arrow" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </div>
+                    <% } %>
+                </div>
+>>>>>>> origin/master
             </div>
         </div>
         <script src="../public/eval/srv/camera.js"></script>

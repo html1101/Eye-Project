@@ -4,5 +4,18 @@
     "provider": "Dr. Khatib",
     "img_url": "https://logodix.com/logo/640751.png",
     "eval_state": "todo",
-    "eval_todo": ["snellan_chart", "color_blindness", "peripheral_vision"]
+    "eval_percent": 75,
+    "eval_todo": [
+    {
+        "name": "Color Blindness Test",
+        "id": "color_blindness"
+    },
+    {
+        "name": "Peripheral Vision Test",
+        "id": "peripheral_vision"
+    }],
+    "eval_completed": [{
+        "name": "Snellan Chart",
+        "completed_on": "01/23/24"
+    }]
 }

@@ -3,6 +3,7 @@ body {
     font-family: "Roboto", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     /* The color palette */
     --off-dark: #222222;
+    --lighter-dark: #333333;
     --focus-blue: #33a8f1;
     --focus-red: #cc1266;
     --success: #00C07F;
