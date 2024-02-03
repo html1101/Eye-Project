@@ -1,12 +1,11 @@
-import * as poseDetection from '@tensorflow-models/pose-detection';
-import * as tf from '@tensorflow/tfjs-core';
-import '@tensorflow/tfjs-backend-webgl';
 
+
+        
 (() => {
     const vid_width = 500;    // We will scale the photo width to this
     const vid_height = 500;     // This will be computed based on the input stream
-    const xlwr = vid_width/3;
-    const ylwr = vid_height/3;
+    const xlwr = 100;
+    const ylwr = 150;
     const boxw = 5;
     const boundsIndicatior = {"out_of_bounds":{"r":220,"g":20,"b":60},
 "in_bounds" : {"r":127,"g":255,"b":0}};
@@ -14,16 +13,18 @@ import '@tensorflow/tfjs-backend-webgl';
     const streaming = false;
     let startbutton = null;
 
-    const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
-    const detector = poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
-        
+
+   
     const to1D = (x,y) => (y-1)*vid_width +x;
-    const inBounds2d = (x,y) => (x > x_lwr) && (x < vid_width -x_lwr) && (y > y_lwr) && (y < vid_height - ylwr) 
+    const inBounds2d = (x,y) => (x > xlwr) && (x < vid_width -xlwr) && (y > ylwr) && (y < vid_height - ylwr) 
     
     
 
-    let vid,c1,ctx1,c_tmp,ctx_tmp,inFrame,r,g,b;
-    function start() {
+    let vid,c1,ctx1,c_tmp,ctx_tmp,inFrame,r,g,b,detector,detectorConfig;
+    async function start() {
+        detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
+        detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
+
         inFrame = false;
         vid = document.getElementById("video");
         const startbutton = document.getElementById("startbutton");
@@ -92,6 +93,7 @@ import '@tensorflow/tfjs-backend-webgl';
             b = boundsIndicatior['out_of_bounds']['b'];
     
         }
+
         for (let i = 0; i < frame.data.length/4;i++) {
             if (inRegion(i)) {
                 frame.data[i*4] = r; 
@@ -100,35 +102,40 @@ import '@tensorflow/tfjs-backend-webgl';
                 
             } 
         }
+        console.log('parsed frame');
         return frame;
     }
 
     function posesInRegion(poses) {
-        let nose = poses[0]['keypoints'][0];
-        let left_eye = poses[0]['keypoints'][1];
-        let right_eye = poses[0]['keypoints'][2];
-        let left_ear = poses[0]['keypoints'][3];
-        let right_ear = poses[0]['keypoints'][4];
-        let left_shoulder = poses[0]['keypoints'][5];
-        let right_shoulder = poses[0]['keypoints'][6];
-
-        return inBounds2d((nose['x'],nose['y'])) &&
-        inBounds2d(left_eye['x'],left_eye['y']) &&
-        inBounds2d(right_eye['x'],right_eye['y']) &&
-        inBounds2d(left_ear['x'],left_ear['y']) &&
-        inBounds2d(right_ear['x'],right_ear['y']) &&
-        inBounds2d(left_shoulder['x'],left_shoulder['y']) &&
-        inBounds2d(right_shoulder['x'],right_shoulder['y'])
+        for (const pose of poses) {
+            let count = 0;
+            for (const kp of pose.keypoints) {
+                if (count < 7 && !inBounds2d(kp.x,kp.y)) return false;
+                count++;
+ 
+            }
+            return true;
+        }
         
     }
-    function computeFrame() {
+    async function computeFrame() {
         ctx_tmp.drawImage(vid,0,0,vid_width,vid_height);
         let frame = ctx_tmp.getImageData(0,0,vid_width,vid_height);
+
+        const poses = await detector.estimatePoses(frame);
+        if (posesInRegion(poses)) {
+            console.log("in region");
+            inFrame = true;
+
+        } 
+        else {
+            console.log("not in region");
+            inFrame = false;
+        }
+        
         ctx1.putImageData(boundingBox(frame,inFrame),0,0);
 
-        const poses = detector.estimatePoses(frame);
-        if (posesInRegion) inFrame = true;
-        else inFrame = false;
+        
     
         setTimeout(computeFrame,0);
 
