@@ -76,3 +76,10 @@ body.sun .finish_txt:hover {
 #video {
     display: none;
 }
+
+#canv {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    max-width: 12.5%;
+}

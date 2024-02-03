@@ -4,23 +4,28 @@
     "provider": "Dr. Khatib",
     "img_url": "https://logodix.com/logo/640751.png",
     "eval_state": "todo",
-    "eval_percent": 25,
-    "eval_due": "03/01/24",
+    "eval_percent": 50,
     "eval_todo": [
-    {
-        "name": "Color Blindness Test",
-        "id": "color_blindness"
-    },
-    {
-        "name": "Peripheral Vision Test",
-        "id": "peripheral_vision"
-    },
-    {
-        "name": "Dry Eyes Test",
-        "id": "dry_eyes"
-    }],
-    "eval_completed": [{
-        "name": "Snellan Chart",
-        "completed_on": "01/23/24"
-    }]
+        {
+            "name": "Color Blindness Test",
+            "id": "color_blindness"
+        },
+        {
+            "name": "Peripheral Vision Test",
+            "id": "peripheral_vision"
+        }
+    ],
+    "eval_completed": [
+        {
+            "name": "Snellan Chart",
+            "completed_on": "01/23/24 3:00 PM",
+            "id": "snell_chart"
+        },
+        {
+            "id": "dry_eyes",
+            "completed_on": "2/3/2024, 01:57 PM",
+            "name": "Dry Eyes Test"
+        }
+    ],
+    "eval_due": "03/01/24"
 }

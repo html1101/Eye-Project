@@ -2,7 +2,8 @@
 let night_tog = document.querySelector(".night_toggle");
 let mode = night_tog.classList.contains("night") ? "night" : "sun";
 document.body.className = mode;
-const std_N = 1.2;
+const std_N = 1;
+
 night_tog.addEventListener("click", evt => {
     if(night_tog.classList.contains("night")) { mode = "sun"; }
     else { mode = "night"; }
@@ -37,7 +38,8 @@ const dis = (a, b) => {
 }
 
 // List of points to log
-let logs = [];
+let logs = [],
+time_stamp = 0;
 
 const main = async () => {
     const detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
@@ -67,6 +69,8 @@ const main = async () => {
         video.srcObject = stream;
         video.play();
         video.autoplay = true;
+        // Start the timer
+        time_stamp = (new Date()).getTime();
     })
     .catch((err) => {
         console.error(`An error occurred: ${err}`);
@@ -95,6 +99,16 @@ const main = async () => {
             // Make an avg between r_t and r_tt
             // r_t = {x: (r_t.x + r_tt.x)/2, y: (r_t.y + r_tt.y)/2, z: (r_t.z + r_tt.z)/2}
             // l_t = {x: (l_t.x + l_tt.x)/2, y: (l_t.y + l_tt.y)/2, z: (l_t.z + l_tt.z)/2}
+            c.beginPath();
+            c.lineWidth = 5;
+            c.strokeStyle = "#CDFADB";
+            c.arc((r_t.x + r_b.x) / 2, (r_t.y + r_b.y) / 2, Math.abs(r_t.y - r_b.y), 0, Math.PI*2);
+            c.stroke();
+
+            c.beginPath();
+            c.strokeStyle = "#CDFADB";
+            c.arc((l_t.x + l_b.x) / 2, (l_t.y + l_b.y) / 2, Math.abs(l_t.y - l_b.y), 0, Math.PI*2);
+            c.stroke();
             
             // Now calc differences between these points:
             // console.log("Left: ", dis(l_t, l_b), "\nRight: ", dis(r_t, r_b));
@@ -110,7 +124,7 @@ const main = async () => {
     video.addEventListener("loadedmetadata", repeat);
 
     // Okie dokie when we press complete we done
-    document.querySelector(".finish_txt").addEventListener("click", evt => {
+    document.querySelector(".finish_txt").addEventListener("click", async evt => {
         // Now go over the logs + parse them out
         console.log("Logs we got:", logs);
         video.pause();
@@ -125,13 +139,40 @@ const main = async () => {
         console.log("ANALYSIS:", avg, std);
         // Log # of times we went over the std by N (a constant) + use for figuring out # of blinks
         let suspected_blinks = summ.map((e, i) => {
-            console.log(avg + std_N * std - e, i);
             return avg + std_N * std - e
-        }).filter(e => {
-            return e <= 0;
         });
-        console.log(suspected_blinks, suspected_blinks.length);
-        
+        console.log(suspected_blinks);
+        // Now cluster blinks that happened at the same times
+        const avg_val = (list) => list.reduce((a, b) => a+b);
+        let blinks = [];
+        let avg_last = [];
+        let going_down = 0;
+        let num_keep = 10;
+        for(let i = 0; i < suspected_blinks.length; i++) {
+            if(avg_last.length < num_keep) {
+                avg_last.push(suspected_blinks[i]);
+                continue;
+            }
+            let pts = avg_val(avg_last);
+            avg_last.push(suspected_blinks[i]);
+            avg_last = avg_last.slice(-num_keep);
+            let new_pts = avg_val(avg_last);
+
+            if(going_down > num_keep && new_pts - pts > 1) {
+                blinks.push(new_pts);
+                going_down = 0;
+            }
+            if(new_pts - pts < 0) {
+                going_down++;
+            }
+        }
+        let num_blinks = Math.round(blinks.length / 2);
+        let mins = (new Date().getTime() - time_stamp) / 60000;
+        console.log("Blinks detected: ", num_blinks, "\nBlinks per Minute: ", num_blinks / mins, "(" + mins + ")");
+        // Send this information to the backend
+        await fetch(`/save/dry_eyes?num_blinks=${num_blinks}&bpm=${num_blinks / mins}&mins=${mins}`);
+        // Okok now time to go back to the home page?
+        window.location = "/";
     })
 }
 

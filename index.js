@@ -8,10 +8,18 @@ const express = require('express'),
 
 // Get user info by reading file
 const user_info = JSON.parse(fs.readFileSync(path.join(__dirname, "user_info.json")));
-const { name, email, provider, img_url, eval_state, eval_percent, eval_todo, eval_completed, eval_due } = user_info;
+let { name, email, provider, img_url, eval_state, eval_percent, eval_todo, eval_completed, eval_due } = user_info;
+
+const change_user_info = (stuff) => {
+  fs.writeFileSync(
+    path.join(__dirname, "user_info.json"),
+    JSON.stringify({ name, email, provider, img_url, eval_state, eval_percent, eval_todo, eval_completed, eval_due, ...stuff }, null, 4)
+  );
+}
 
 // This lets us put in user info super easily
 app.set("view engine", "ejs");
+app.use(express.json());
 
 const send_dashboard = (res) => {
   res.render(
@@ -61,6 +69,34 @@ app.get("/eval/dry_eyes", (_req, res) => {
   // Parse information from user info JSON
   res.sendFile(path.join(__dirname, "public", "eval", "dry_eyes", "dry_eyes.html"));
 });
+
+// Listen for saving info from the backend + place into test_data.json
+app.get('/save/dry_eyes', (req, res) => {
+  // Parse info from JSON
+  let { num_blinks, bpm, mins } = req.query;
+  num_blinks = parseFloat(num_blinks);
+  bpm = parseFloat(bpm);
+  mins = parseFloat(mins);
+  
+  // Now take test_data.json.
+  fs.writeFileSync(path.join(__dirname, "test_data.json"), JSON.stringify({ num_blinks, bpm, mins }, null, 4));
+
+  // This test has been completed, so now let's alter user_info to update that
+  // eval_state, eval_percent, eval_todo, eval_completed
+  // eval_todo - take out this test + complete
+  eval_todo = eval_todo.filter(e => e.id != "dry_eyes");
+  var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: "2-digit", minute: "2-digit"};
+  var today  = new Date();
+
+  eval_completed.push({id: "dry_eyes", completed_on: today.toLocaleDateString("en-US", options), name: "Dry Eyes Test"});
+  // Now update the percent accordingly
+  eval_percent = Math.round(eval_todo.length / (eval_completed.length + eval_todo.length) * 100);
+  if(eval_percent == 100) eval_state = "done";
+  else eval_state = "todo";
+  change_user_info({ eval_state, eval_percent, eval_todo, eval_completed });
+
+  res.send("Completed request.");
+})
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
