@@ -107,4 +107,3 @@ progress[value].done::-webkit-progress-value {
 .task_list .task:not(.done):hover svg {
     opacity: 1;
 }
->>>>>>> origin/master
