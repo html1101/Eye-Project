@@ -1,0 +1,31 @@
+{
+  "name": "eyeproject",
+  "version": "1.0.0",
+  "description": "Evaluation and learning platform for eyes!",
+  "main": "index.js",
+  "scripts": {
+    "start": "express main",
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/html1101/Eye-Project.git"
+  },
+  "keywords": [
+    "eye",
+    "vision",
+    "cmu",
+    "hackathon",
+    "learn",
+    "eval"
+  ],
+  "author": "Sarah Cross, Elizabeth Terveen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/html1101/Eye-Project/issues"
+  },
+  "homepage": "https://github.com/html1101/Eye-Project#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
