@@ -13,14 +13,6 @@
         {
             "name": "Peripheral Vision Test",
             "id": "peripheral_vision"
-        }
-    ],
-    "eval_completed": [
-        {
-            "id": "dry_eyes",
-            "completed_on": "2/3/2024, 03:05 PM",
-            "name": "Dry Eyes Test",
-            "score": 24.052591521424766
         },
         {
             "id": "snellan_chart",
@@ -29,29 +21,12 @@
             "vision": null
         },
         {
-            "id": "snellan_chart",
-            "completed_on": "2/3/2024, 04:27 PM",
-            "name": "Snellan Chart Test",
-            "vision": 20
-        },
-        {
-            "id": "snellan_chart",
-            "completed_on": "2/3/2024, 04:27 PM",
-            "name": "Snellan Chart Test",
-            "vision": "20/50"
-        },
-        {
-            "id": "snellan_chart",
-            "completed_on": "2/3/2024, 04:28 PM",
-            "name": "Snellan Chart Test",
-            "vision": "20/50"
-        },
-        {
-            "id": "snellan_chart",
-            "completed_on": "2/3/2024, 04:28 PM",
-            "name": "Snellan Chart Test",
-            "vision": "20/50"
+            "id": "dry_eyes",
+            "completed_on": "2/3/2024, 03:05 PM",
+            "name": "Dry Eyes Test",
+            "score": 24.052591521424766
         }
     ],
+    "eval_completed": [],
     "eval_due": "03/01/24"
 }

@@ -20,6 +20,25 @@
         <div class="letters">
             <!-- Generate random list of letters of varying sizes -->
         </div>
+
+        <div class="audio_stuff">
+            <video id="video">Video stream not available.</video>
+            <canvas id="output-canvas" width = "500" height = "500"> </canvas>
+            <div class ="audio">
+                <audio id = recordedAudio></audio>
+                <p>
+                    <button id="btnStart">Start Recording</button>
+                    <button id="btnStop" disabeled>Stop Recording</button>
+                </p>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+        <script src="/public/eval/srv/eyes.js"></script>
+        <script src="/public/eval/snellan_chart/audio.js"></script>
+        <script src="/public/eval/snellan_chart/camera.js"></script>
         <script src="/public/eval/snellan_chart/snellan_chart.js"></script>
     </body>
 </html>

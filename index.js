@@ -6,6 +6,10 @@ const express = require('express'),
   app = express(),
   port = 8080;
 
+
+const multer  = require('multer')
+const upload = multer()
+
 // Get user info by reading file
 const user_info = JSON.parse(fs.readFileSync(path.join(__dirname, "user_info.json")));
 let { name, email, provider, img_url, eval_state, eval_percent, eval_todo, eval_completed, eval_due } = user_info;
@@ -129,6 +133,37 @@ app.get('/save/dry_eyes', (req, res) => {
 
   res.send("Completed request.");
 })
+
+//open-ai eval routes
+const { OpenAIApi } = require("openai");
+const model = "whisper-1";
+
+//when we get a request for audio, we add a transcription
+app.get('/audio',(req,res) =>{
+  const openAi = new OpenAIApi(new Configuration({ apiKey:"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" }));
+  this.openai
+    .audio
+    .speech.create({
+        file: './public/eval/snellan_chart/recordings/raw/recording.ogg',
+        model: model,
+        response_format: "json",
+      })
+      .then((response) => console.log(response.data)); //need to modify so it is saved in /recordings/transcript/transcript.json
+  res.send(true);
+});
+
+app.post('/upload', upload.single('file'), (req,res) => {
+  console.log('upload request');
+  const { buffer:recording } = req.file;
+  fs.open('./public/eval/snellan_chart/recordings/raw/recording.ogg','w+', (err,fd) => {
+    fs.writeFile(fd,recording,(err)=> {
+      console.log("Wrote file!");
+      fs.close(fd, (err) => {
+        res.status(200).send('recording.ogg');
+      });
+    });
+  });
+});
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 

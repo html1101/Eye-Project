@@ -104,3 +104,25 @@ font size (pt)  152  130   108    87    65    43    33    21   15    9
     transform: translateY(-50%);
     letter-spacing: normal !important;
 }
+
+.audio_stuff {
+    position: fixed;
+    bottom: 0;
+}
+
+.audio_stuff .audio {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.audio_stuff video {
+    display: none;
+}
+
+.audio_stuff canvas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-width: 200px;
+}
