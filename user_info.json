@@ -4,7 +4,8 @@
     "provider": "Dr. Khatib",
     "img_url": "https://logodix.com/logo/640751.png",
     "eval_state": "todo",
-    "eval_percent": 75,
+    "eval_percent": 25,
+    "eval_due": "03/01/24",
     "eval_todo": [
     {
         "name": "Color Blindness Test",
@@ -13,6 +14,10 @@
     {
         "name": "Peripheral Vision Test",
         "id": "peripheral_vision"
+    },
+    {
+        "name": "Dry Eyes Test",
+        "id": "dry_eyes"
     }],
     "eval_completed": [{
         "name": "Snellan Chart",

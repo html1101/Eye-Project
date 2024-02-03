@@ -1,0 +1,78 @@
+/* Style up this text to make it easier to read */
+.text {
+    font-size: 20px;
+    /* Make it in the center of the page too! */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    font-family: Roboto;
+    line-height: 1.7em;
+}
+
+body {
+    transition: 0.2s;
+}
+
+body.night {
+    background: var(--off-dark);
+}
+
+body.sun {
+    background: white;
+    color: var(--off-dark);
+}
+
+.night_toggle {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    width: 1.5em;
+    height: 1.5em;
+}
+.night_toggle > * {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.night_toggle.sun .bi-sun {
+    display: block;
+}
+.night_toggle.night .bi-moon-stars {
+    display: block;
+}
+
+.finish_txt {
+    text-align: center;
+    font-size: 15px;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: var(--off-dark);
+    background: var(--focus-blue);
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.2s;
+    cursor: pointer;
+    border: 1.5px solid var(--focus-blue);
+    margin-bottom: 5em;
+    margin-top: 1em;
+}
+
+body.night .finish_txt:hover {
+    background: var(--off-dark);
+    color: var(--focus-blue);
+}
+
+body.sun .finish_txt:hover {
+    background: white;
+    color: var(--focus-blue);
+}
+
+#video {
+    display: none;
+}

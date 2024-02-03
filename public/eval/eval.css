@@ -8,11 +8,25 @@
     width: calc(100% - 2em);
     border-radius: 2px;
     overflow: hidden;
-    background: var(--success-light);
+    margin-top: 1em;
+    padding: 1em;
+    box-sizing: border-box;
+}
+.status-banner.todo {
+    /* border: 1.5px solid var(--failure); */
+    background: var(--failure-light);
 }
 
 .status-banner > svg {
     height: 100%;
+}
+.status-banner .side_txt {
+    line-height: 1.4em;
+}
+.status-banner .side_txt h1 {
+    line-height: 1em;
+    margin-bottom: 5px;
+    margin-top: 2px;
 }
 .status-banner.todo > svg {
     color: var(--failure);
@@ -63,6 +77,7 @@ progress[value].done::-webkit-progress-value {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
+    margin-top: -1em;
 }
 .task_list .task {
     height: 3em;

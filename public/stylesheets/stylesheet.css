@@ -8,6 +8,7 @@ body {
     --focus-red: #cc1266;
     --success: #00C07F;
     --failure: #FF6562;
+    --failure-light: #ff65620b;
     background: var(--off-dark);
     color: white;
 }
