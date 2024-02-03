@@ -4,7 +4,7 @@
   "description": "Evaluation and learning platform for eyes!",
   "main": "index.js",
   "scripts": {
-    "start": "express main",
+    "start": "node index.js",
     "test": "node index.js"
   },
   "repository": {
