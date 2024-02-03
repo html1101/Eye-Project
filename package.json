@@ -1,7 +1,7 @@
 {
-  "name": "eyeproject",
+  "name": "optopulseai",
   "version": "1.0.0",
-  "description": "Evaluation and learning platform for eyes!",
+  "description": "An all-in-one AI platform designed to evaluate and analyze optometric information, such as elevated dry eye risk and basic vision tests.",
   "main": "index.js",
   "scripts": {
     "listen": "nodemon public/eval/srv/eyes.tsc",
