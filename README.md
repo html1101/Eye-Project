@@ -1,4 +1,4 @@
-<h1>OctoPulse AI</h1>
+<h1>OptoPulse AI</h1>
 <h2>The What</h2>
 <i>An all-in-one AI platform designed to evaluate and analyze optometric information, such as elevated dry eye risk and basic vision tests.</i>
 
